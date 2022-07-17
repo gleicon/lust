@@ -6,11 +6,11 @@ fn parse_list_of_floats(
     args: &[definitions::LustExpression],
 ) -> Result<Vec<f64>, definitions::LustErrors> {
     args.iter()
-        .map(|x| parse_single_float(x))
+        .map(|x| check_if_number(x))
         .collect::<Result<Vec<f64>, definitions::LustErrors>>()
 }
 
-fn parse_single_float(exp: &definitions::LustExpression) -> Result<f64, definitions::LustErrors> {
+fn check_if_number(exp: &definitions::LustExpression) -> Result<f64, definitions::LustErrors> {
     match exp {
         definitions::LustExpression::Number(num) => Ok(*num),
         _ => Err(definitions::LustErrors::SyntaxError(
